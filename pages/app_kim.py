@@ -4,19 +4,19 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px 
 import geopandas as gpd
-import contextily as ctx
 import json
 from datetime import datetime
 from dotenv import load_dotenv
 import os
 import math
 import matplotlib.pyplot as plt
-import xyzservices.providers as xyz
 import plotly.io as pio
 from plotly.subplots import make_subplots
 
 load_dotenv()
 MAP_TOKEN = os.getenv('MAP_TOKEN')
+import streamlit as st
+import os
 
 st.set_page_config(
     page_title="메인",
@@ -46,30 +46,7 @@ def main():
     # 데이터 불러오기
     geo_data = load_geo_data("data/seoul_jan.geojson")
     data = load_data("data/data.csv")   
-    new_columns = {'ACC_YEAR': '접수연도',
-                'SGG_CD': '자치구코드',
-                'SGG_NM': '자치구명',
-                'BJDONG_CD': '법정동코드',
-                'BJDONG_NM': '법정동명',
-                'LAND_GBN': '지번구분',
-                'LAND_GBN_NM': '지번구분명',
-                'BONBEON': '본번',
-                'BUBEON': '부번',
-                'BLDG_NM': '건물명',
-                'DEAL_YMD': '계약일',
-                'OBJ_AMT': '물건금액(만원)',
-                'BLDG_AREA': '건물면적(㎡)',
-                'TOT_AREA': '토지면적(㎡)',
-                'FLOOR': '층',
-                'RIGHT_GBN': '권리구분',
-                'CNTL_YMD': '취소일',
-                'BUILD_YEAR': '건축년도',
-                'HOUSE_TYPE': '건물용도',
-                'REQ_GBN': '신고구분',
-                'RDEALER_LAWDNM': '신고한 개업공인중개사 시군구명'}
 
-    data.rename(columns=new_columns, inplace=True)
-    # data
 
     col1, col2 = st.columns([7,3])
     
@@ -136,6 +113,21 @@ def main():
             # Display the figure in the Streamlit app
             st.plotly_chart(fig)
             
+    with col2:
+        with st.container(border=False, height=600):
+            with st.container(border=True, height=138):
+                st.metric(label="1월 총 거래 건수", value='3112건', delta= '-34.08% (23년 12월 대비)',
+                        delta_color="normal", help="미접수 거래는 반영되지 않았습니다.")
+            with st.container(border=True, height=138):
+                st.metric(label="1월 최다 거래 지역", value='강서구', delta='평균 대비 112건',
+                        delta_color="normal", help="강서구의 1월 거래량은 총 236건입니다.")
+            with st.container(border=True, height=138):
+                st.metric(label="1월 최고 거래가 지역", value='강남구', delta='평균 대비 119,382만원',
+                        delta_color="normal", help="강남구의 1월 평균 거래가는 158,170만원입니다.")
+            with st.container(border=True, height=138):
+                st.metric(label="1월 건물면적(㎡) 넓은 지역", value='성동구', delta='평균 대비 24.57㎡',
+                        delta_color="normal", help="성동구의 1월 평균 건물면적은 84.75㎡입니다.")
+                    
     with col2:
         with st.container(border=False, height=600):
             with st.container(border=True, height=138):
@@ -411,4 +403,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
