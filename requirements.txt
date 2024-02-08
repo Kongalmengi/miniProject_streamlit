@@ -20,4 +20,3 @@ jupyterlab
 requests
 beautifulsoup4
 selenium
-streamlit
