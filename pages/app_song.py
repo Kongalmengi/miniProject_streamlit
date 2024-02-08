@@ -125,6 +125,7 @@ def apt_avg(df):
     # 플롯 보이기
     st.plotly_chart(fig, use_container_width=True)
 
+
 def multi_gene_avg(df):
     st.title("지역별 연립다세대 건축년도 평균")
 
@@ -150,6 +151,7 @@ def multi_gene_avg(df):
     # 플롯 보이기
     st.plotly_chart(fig, use_container_width=True)
 
+
 def single_avg(df):
     st.title("지역별 단독다가구 건축년도 평균")
     # '단독다가구'에 대한 데이터만 필터링
@@ -174,6 +176,7 @@ def single_avg(df):
 
     # 플롯 보이기
     st.plotly_chart(fig, use_container_width=True)
+
 
 def office_avg(df):
     st.title("지역별 오피스텔 건축년도 평균")
@@ -203,6 +206,7 @@ def office_avg(df):
 
 
 # 이하 재건축 수 차트
+
 def apt_over(df):
     st.title('지역별 아파트 재건축연한 초과 수')
 
@@ -228,6 +232,7 @@ def apt_over(df):
 
     # 플롯 보이기
     st.plotly_chart(fig, use_container_width=True)
+
 
 def multi_gene_over(df):
     st.title('지역별 연립다세대 재건축연한 초과 수')
@@ -279,6 +284,7 @@ def single_over(df):
 
     # 플롯 보이기
     st.plotly_chart(fig, use_container_width=True)
+
 
 
 def office_over(df):
